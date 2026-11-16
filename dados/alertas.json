@@ -1,0 +1,103 @@
+[
+  {
+    "id": "a-gastao-vidigal",
+    "trecho": "Av. Gastão Vidigal",
+    "sentido": "sentido centro",
+    "motivo": "Alagamento",
+    "nivel": "intransitavel",
+    "fontes": [
+      "Câmera fixa",
+      "ônibus 4313"
+    ],
+    "temCameraFixa": true,
+    "confirmadoEm": "2026-11-16T15:52:13.108Z",
+    "demoConfirmadoHaMin": 4,
+    "rotaIds": [
+      "r-casa-loja"
+    ],
+    "destinoDaRota": "a loja",
+    "desvio": {
+      "via": "Av. Mofarrej",
+      "duracaoMin": 32,
+      "minutosExtra": 6,
+      "trajeto": [
+        [
+          -23.5275,
+          -46.7285
+        ],
+        [
+          -23.5262,
+          -46.7322
+        ],
+        [
+          -23.527,
+          -46.737
+        ],
+        [
+          -23.5302,
+          -46.7384
+        ],
+        [
+          -23.5338,
+          -46.7362
+        ]
+      ]
+    },
+    "trajetoBloqueado": [
+      [
+        -23.5275,
+        -46.7285
+      ],
+      [
+        -23.5296,
+        -46.7318
+      ],
+      [
+        -23.5318,
+        -46.7338
+      ],
+      [
+        -23.5338,
+        -46.7362
+      ]
+    ],
+    "enviadoUrgencia": true,
+    "lat": -23.5318,
+    "lng": -46.7338
+  },
+  {
+    "id": "a-imperatriz",
+    "trecho": "Av. Imperatriz Leopoldina",
+    "motivo": "Buraco crítico na pista",
+    "nivel": "atencao",
+    "fontes": [
+      "ônibus 8707"
+    ],
+    "temCameraFixa": false,
+    "confirmadoEm": "2026-11-16T15:44:13.108Z",
+    "demoConfirmadoHaMin": 12,
+    "rotaIds": [
+      "r-casa-ubs"
+    ],
+    "destinoDaRota": "a UBS",
+    "enviadoUrgencia": false,
+    "lat": -23.5265,
+    "lng": -46.7345
+  },
+  {
+    "id": "a-vital-brasil",
+    "trecho": "Av. Vital Brasil",
+    "motivo": "Semáforo apagado",
+    "nivel": "atencao",
+    "fontes": [
+      "Câmera fixa"
+    ],
+    "temCameraFixa": true,
+    "confirmadoEm": "2026-11-16T15:47:13.108Z",
+    "demoConfirmadoHaMin": 9,
+    "rotaIds": [],
+    "enviadoUrgencia": false,
+    "lat": -23.5713,
+    "lng": -46.7098
+  }
+]

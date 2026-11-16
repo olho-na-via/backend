@@ -1,0 +1,76 @@
+[
+  {
+    "id": "r-casa-loja",
+    "usuarioId": "marta",
+    "nome": "Casa → Loja",
+    "origem": "R. Carlos Weber",
+    "destino": "Av. Dr. Gastão Vidigal",
+    "dias": [
+      "seg",
+      "ter",
+      "qua",
+      "qui",
+      "sex",
+      "sab"
+    ],
+    "horario": "07:00",
+    "meio": "carro"
+  },
+  {
+    "id": "r-loja-banco",
+    "usuarioId": "marta",
+    "nome": "Loja → Banco",
+    "origem": "Av. Dr. Gastão Vidigal",
+    "destino": "R. Guaicurus",
+    "dias": [
+      "seg",
+      "ter",
+      "qua",
+      "qui",
+      "sex"
+    ],
+    "horario": "14:00",
+    "meio": "onibus"
+  },
+  {
+    "id": "r-casa-ubs",
+    "usuarioId": "marta",
+    "nome": "Casa → UBS",
+    "origem": "R. Carlos Weber",
+    "destino": "Av. Imperatriz Leopoldina",
+    "dias": [
+      "qui"
+    ],
+    "horario": "09:00",
+    "meio": "a-pe"
+  },
+  {
+    "id": "r-casa-trabalho",
+    "usuarioId": "juliana",
+    "nome": "Casa → Trabalho",
+    "origem": "R. Butantã",
+    "destino": "Av. Brig. Faria Lima",
+    "dias": [
+      "seg",
+      "ter",
+      "qua",
+      "qui",
+      "sex"
+    ],
+    "horario": "08:00",
+    "meio": "bicicleta"
+  },
+  {
+    "id": "r-lourdes-ubs",
+    "usuarioId": "lourdes",
+    "nome": "Casa → UBS",
+    "origem": "Av. do Rio Pequeno",
+    "destino": "R. Corifeu de Azevedo Marques",
+    "dias": [
+      "ter",
+      "qui"
+    ],
+    "horario": "08:30",
+    "meio": "onibus"
+  }
+]

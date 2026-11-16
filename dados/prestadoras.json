@@ -1,0 +1,97 @@
+[
+  {
+    "id": "prestadora-a",
+    "nome": "Prestadora A",
+    "tipo": "Tapa-buraco",
+    "orgao": "subprefeitura",
+    "reparosNoMes": 138,
+    "aprovadosPrimeiraVerificacao": 94,
+    "tempoMedioDias": 2.1,
+    "reaberturas90d": 6,
+    "vencidos": 2,
+    "historico": [
+      88,
+      90,
+      91,
+      93,
+      92,
+      94
+    ]
+  },
+  {
+    "id": "prestadora-b",
+    "nome": "Prestadora B",
+    "tipo": "Tapa-buraco",
+    "orgao": "subprefeitura",
+    "reparosNoMes": 121,
+    "aprovadosPrimeiraVerificacao": 81,
+    "tempoMedioDias": 3,
+    "reaberturas90d": 17,
+    "vencidos": 5,
+    "historico": [
+      74,
+      77,
+      79,
+      78,
+      80,
+      81
+    ]
+  },
+  {
+    "id": "prestadora-c",
+    "nome": "Prestadora C",
+    "tipo": "Tapa-buraco",
+    "orgao": "subprefeitura",
+    "reparosNoMes": 96,
+    "aprovadosPrimeiraVerificacao": 63,
+    "tempoMedioDias": 4.6,
+    "reaberturas90d": 31,
+    "vencidos": 11,
+    "historico": [
+      71,
+      69,
+      68,
+      66,
+      64,
+      63
+    ]
+  },
+  {
+    "id": "sabesp",
+    "nome": "Sabesp",
+    "tipo": "Concessionária · recomposição de valas",
+    "orgao": "sabesp",
+    "reparosNoMes": 44,
+    "aprovadosPrimeiraVerificacao": 72,
+    "tempoMedioDias": 5.2,
+    "reaberturas90d": 12,
+    "vencidos": 6,
+    "historico": [
+      66,
+      68,
+      70,
+      69,
+      71,
+      72
+    ]
+  },
+  {
+    "id": "cet-sinalizacao",
+    "nome": "CET · Sinalização",
+    "tipo": "Sinalização e semáforos",
+    "orgao": "cet",
+    "reparosNoMes": 57,
+    "aprovadosPrimeiraVerificacao": 88,
+    "tempoMedioDias": 3.4,
+    "reaberturas90d": 4,
+    "vencidos": 3,
+    "historico": [
+      83,
+      85,
+      84,
+      86,
+      87,
+      88
+    ]
+  }
+]

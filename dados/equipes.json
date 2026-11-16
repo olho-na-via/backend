@@ -1,0 +1,37 @@
+[
+  {
+    "id": "leste-1",
+    "nome": "Equipe Leste 1",
+    "prestadoraId": "prestadora-a",
+    "orgao": "subprefeitura",
+    "subprefeitura": "Butantã"
+  },
+  {
+    "id": "leste-2",
+    "nome": "Equipe Leste 2",
+    "prestadoraId": "prestadora-b",
+    "orgao": "subprefeitura",
+    "subprefeitura": "Butantã"
+  },
+  {
+    "id": "oeste-1",
+    "nome": "Equipe Oeste 1",
+    "prestadoraId": "prestadora-c",
+    "orgao": "subprefeitura",
+    "subprefeitura": "Butantã"
+  },
+  {
+    "id": "cet-3",
+    "nome": "CET Sinalização 3",
+    "prestadoraId": "cet-sinalizacao",
+    "orgao": "cet",
+    "subprefeitura": "Butantã"
+  },
+  {
+    "id": "sabesp-valas",
+    "nome": "Sabesp Valas Oeste",
+    "prestadoraId": "sabesp",
+    "orgao": "sabesp",
+    "subprefeitura": "Butantã"
+  }
+]

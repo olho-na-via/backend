@@ -1,0 +1,293 @@
+{
+  "melhoresHorarios": {
+    "faixas": [
+      "0h–6h",
+      "6h–9h",
+      "9h–12h",
+      "12h–15h",
+      "15h–18h",
+      "18h–21h",
+      "21h–24h"
+    ],
+    "dias": [
+      "seg.",
+      "ter.",
+      "qua.",
+      "qui.",
+      "sex.",
+      "sáb.",
+      "dom."
+    ],
+    "trechos": [
+      {
+        "via": "Av. Prof. Francisco Morato",
+        "matriz": [
+          [
+            8,
+            92,
+            61,
+            58,
+            74,
+            96,
+            31
+          ],
+          [
+            9,
+            94,
+            63,
+            60,
+            76,
+            97,
+            33
+          ],
+          [
+            9,
+            93,
+            62,
+            61,
+            77,
+            97,
+            34
+          ],
+          [
+            10,
+            95,
+            64,
+            60,
+            79,
+            98,
+            38
+          ],
+          [
+            12,
+            90,
+            66,
+            68,
+            84,
+            99,
+            52
+          ],
+          [
+            14,
+            41,
+            58,
+            62,
+            55,
+            49,
+            44
+          ],
+          [
+            11,
+            18,
+            34,
+            42,
+            39,
+            36,
+            24
+          ]
+        ]
+      },
+      {
+        "via": "Av. Vital Brasil",
+        "matriz": [
+          [
+            6,
+            88,
+            55,
+            52,
+            70,
+            91,
+            27
+          ],
+          [
+            7,
+            90,
+            57,
+            54,
+            72,
+            93,
+            28
+          ],
+          [
+            7,
+            89,
+            58,
+            55,
+            71,
+            92,
+            30
+          ],
+          [
+            8,
+            91,
+            59,
+            56,
+            74,
+            94,
+            33
+          ],
+          [
+            10,
+            86,
+            61,
+            63,
+            80,
+            95,
+            47
+          ],
+          [
+            11,
+            36,
+            50,
+            55,
+            48,
+            44,
+            39
+          ],
+          [
+            9,
+            15,
+            29,
+            37,
+            34,
+            31,
+            20
+          ]
+        ]
+      },
+      {
+        "via": "R. Corifeu de Azevedo Marques",
+        "matriz": [
+          [
+            5,
+            79,
+            48,
+            46,
+            63,
+            84,
+            22
+          ],
+          [
+            5,
+            81,
+            50,
+            47,
+            64,
+            85,
+            23
+          ],
+          [
+            6,
+            80,
+            49,
+            48,
+            65,
+            85,
+            25
+          ],
+          [
+            6,
+            82,
+            51,
+            49,
+            67,
+            87,
+            27
+          ],
+          [
+            8,
+            78,
+            54,
+            55,
+            72,
+            88,
+            40
+          ],
+          [
+            9,
+            30,
+            44,
+            48,
+            42,
+            38,
+            33
+          ],
+          [
+            7,
+            12,
+            25,
+            31,
+            29,
+            26,
+            17
+          ]
+        ]
+      }
+    ]
+  },
+  "precisaoIa": [
+    {
+      "bairro": "Butantã",
+      "tipoDeVia": "Avenida e corredor",
+      "amostra": 42,
+      "precisao": 95
+    },
+    {
+      "bairro": "Butantã",
+      "tipoDeVia": "Rua local",
+      "amostra": 31,
+      "precisao": 91
+    },
+    {
+      "bairro": "Rio Pequeno",
+      "tipoDeVia": "Avenida e corredor",
+      "amostra": 28,
+      "precisao": 93
+    },
+    {
+      "bairro": "Rio Pequeno",
+      "tipoDeVia": "Rua local",
+      "amostra": 26,
+      "precisao": 87
+    },
+    {
+      "bairro": "Jaguaré",
+      "tipoDeVia": "Avenida e corredor",
+      "amostra": 24,
+      "precisao": 92
+    },
+    {
+      "bairro": "Jaguaré",
+      "tipoDeVia": "Rua local e viela",
+      "amostra": 19,
+      "precisao": 84
+    }
+  ],
+  "equidade": [
+    {
+      "distrito": "Butantã",
+      "tipo": "centro",
+      "diasAteReparo": 2.6
+    },
+    {
+      "distrito": "Morumbi",
+      "tipo": "centro",
+      "diasAteReparo": 2.5
+    },
+    {
+      "distrito": "Rio Pequeno",
+      "tipo": "periferia",
+      "diasAteReparo": 2.9
+    },
+    {
+      "distrito": "Raposo Tavares",
+      "tipo": "periferia",
+      "diasAteReparo": 3.2
+    },
+    {
+      "distrito": "Jaguaré",
+      "tipo": "periferia",
+      "diasAteReparo": 2.8
+    }
+  ]
+}

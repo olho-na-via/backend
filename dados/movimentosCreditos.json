@@ -1,0 +1,98 @@
+[
+  {
+    "id": "m1",
+    "usuarioId": "rafael",
+    "pontos": 10,
+    "motivo": "Reporte validado · buraco",
+    "detalhe": "R. Carlos Weber",
+    "em": "2026-11-15T13:56:13.108Z"
+  },
+  {
+    "id": "m2",
+    "usuarioId": "rafael",
+    "pontos": 5,
+    "motivo": "Confirmou um reparo",
+    "detalhe": "Av. Francisco Morato",
+    "em": "2026-11-13T15:56:13.108Z"
+  },
+  {
+    "id": "m3",
+    "usuarioId": "rafael",
+    "pontos": 0,
+    "motivo": "Reporte já existia",
+    "detalhe": "sem pontos, mas ajudou a confirmar",
+    "em": "2026-11-11T15:56:13.108Z"
+  },
+  {
+    "id": "m4",
+    "usuarioId": "rafael",
+    "pontos": 50,
+    "motivo": "Kit ativo por 20 dias",
+    "detalhe": "mês passado",
+    "em": "2026-11-05T15:56:13.108Z"
+  },
+  {
+    "id": "m5",
+    "usuarioId": "rafael",
+    "pontos": 100,
+    "motivo": "10 reportes validados",
+    "detalhe": "mês passado",
+    "em": "2026-10-29T15:56:13.108Z"
+  },
+  {
+    "id": "m6",
+    "usuarioId": "rafael",
+    "pontos": 25,
+    "motivo": "5 reparos confirmados",
+    "detalhe": "mês passado",
+    "em": "2026-10-23T15:56:13.108Z"
+  },
+  {
+    "id": "m7",
+    "usuarioId": "rafael",
+    "pontos": 50,
+    "motivo": "Kit ativo por 20 dias",
+    "detalhe": "há dois meses",
+    "em": "2026-10-06T15:56:13.108Z"
+  },
+  {
+    "id": "m8",
+    "usuarioId": "rafael",
+    "pontos": 50,
+    "motivo": "5 reportes validados",
+    "detalhe": "há dois meses",
+    "em": "2026-09-29T15:56:13.108Z"
+  },
+  {
+    "id": "m9",
+    "usuarioId": "rafael",
+    "pontos": 50,
+    "motivo": "Kit ativo por 20 dias",
+    "detalhe": "há três meses",
+    "em": "2026-09-05T15:56:13.108Z"
+  },
+  {
+    "id": "m10",
+    "usuarioId": "juliana",
+    "pontos": 10,
+    "motivo": "Reporte validado · tampa de bueiro",
+    "detalhe": "Av. Brig. Faria Lima",
+    "em": "2026-11-08T15:56:13.108Z"
+  },
+  {
+    "id": "m11",
+    "usuarioId": "juliana",
+    "pontos": 10,
+    "motivo": "Reporte validado · placa caída",
+    "detalhe": "R. Cardeal Arcoverde",
+    "em": "2026-11-14T15:56:13.108Z"
+  },
+  {
+    "id": "m12",
+    "usuarioId": "lourdes",
+    "pontos": 5,
+    "motivo": "Confirmou um reparo",
+    "detalhe": "R. Corifeu de Azevedo Marques",
+    "em": "2026-10-27T15:56:13.108Z"
+  }
+]

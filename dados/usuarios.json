@@ -1,0 +1,118 @@
+[
+  {
+    "id": "juliana",
+    "nome": "Juliana",
+    "nomeCompleto": "Juliana, 31",
+    "idade": 31,
+    "persona": "Ciclista",
+    "bairro": "Pinheiros",
+    "lat": -23.5672,
+    "lng": -46.7012,
+    "whatsapp": "(11) 9••••-7702",
+    "temKit": false,
+    "diasKitNoMes": 0,
+    "bilheteFinal": "2218",
+    "seguindo": [
+      "48301",
+      "48213",
+      "48188",
+      "47702"
+    ],
+    "preferencias": {
+      "push": true,
+      "whatsapp": false,
+      "soGraves": false,
+      "silenciar": true,
+      "silenciarDe": "22:00",
+      "silenciarAte": "06:00",
+      "avisarOutraPessoa": false,
+      "outraPessoaNome": "",
+      "outraPessoaWhatsapp": ""
+    }
+  },
+  {
+    "id": "lourdes",
+    "nome": "Dona Lourdes",
+    "nomeCompleto": "Dona Lourdes, 71",
+    "idade": 71,
+    "persona": "Pedestre",
+    "bairro": "Rio Pequeno",
+    "lat": -23.5672,
+    "lng": -46.7345,
+    "whatsapp": "(11) 9••••-1050",
+    "temKit": false,
+    "diasKitNoMes": 0,
+    "bilheteFinal": "9034",
+    "seguindo": [
+      "51027",
+      "47950"
+    ],
+    "preferencias": {
+      "push": true,
+      "whatsapp": true,
+      "soGraves": false,
+      "silenciar": true,
+      "silenciarDe": "22:00",
+      "silenciarAte": "06:00",
+      "avisarOutraPessoa": false,
+      "outraPessoaNome": "",
+      "outraPessoaWhatsapp": ""
+    }
+  },
+  {
+    "id": "marta",
+    "nome": "Marta",
+    "nomeCompleto": "Marta, 58",
+    "idade": 58,
+    "persona": "Área de alagamento",
+    "bairro": "Vila Leopoldina",
+    "lat": -23.5275,
+    "lng": -46.7285,
+    "whatsapp": "(11) 9••••-4321",
+    "temKit": false,
+    "diasKitNoMes": 0,
+    "bilheteFinal": "6157",
+    "seguindo": [
+      "48177"
+    ],
+    "preferencias": {
+      "push": true,
+      "whatsapp": true,
+      "soGraves": false,
+      "silenciar": true,
+      "silenciarDe": "22:00",
+      "silenciarAte": "06:00",
+      "avisarOutraPessoa": false,
+      "outraPessoaNome": "",
+      "outraPessoaWhatsapp": ""
+    }
+  },
+  {
+    "id": "rafael",
+    "nome": "Rafael",
+    "nomeCompleto": "Rafael, 26",
+    "idade": 26,
+    "persona": "Fiscal da Via",
+    "bairro": "Jaguaré",
+    "lat": -23.548,
+    "lng": -46.7455,
+    "whatsapp": "(11) 9••••-8846",
+    "temKit": true,
+    "diasKitNoMes": 14,
+    "bilheteFinal": "4471",
+    "seguindo": [
+      "48231"
+    ],
+    "preferencias": {
+      "push": true,
+      "whatsapp": false,
+      "soGraves": false,
+      "silenciar": true,
+      "silenciarDe": "22:00",
+      "silenciarAte": "06:00",
+      "avisarOutraPessoa": false,
+      "outraPessoaNome": "",
+      "outraPessoaWhatsapp": ""
+    }
+  }
+]
