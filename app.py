@@ -96,6 +96,7 @@ def criar_app():
     app.json.ensure_ascii = False
     app.json.sort_keys = False
     Swagger(app, template=MODELO_DO_SWAGGER, config={
+        "title": "Olho na Via · API",
         "headers": [],
         "specs": [{"endpoint": "openapi", "route": "/openapi.json"}],
         "static_url_path": "/flasgger_static",
