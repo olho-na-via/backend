@@ -9,6 +9,7 @@ from config import CONFIG
 from erros import ErroDaApi
 from registro import configurar_logs
 from rotas.acesso import rotas_de_acesso
+from rotas.cidadao import rotas_do_cidadao
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +44,46 @@ MODELO_DO_SWAGGER = {
                 "pessoa": {"type": "object"},
             },
         },
+        "Chamado": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "example": "48213"},
+                "protocolo": {"type": "string", "example": "48213"},
+                "categoria": {"type": "string", "example": "buraco"},
+                "titulo": {"type": "string"},
+                "endereco": {"type": "string"},
+                "bairro": {"type": "string"},
+                "subprefeitura": {"type": "string"},
+                "lat": {"type": "number"},
+                "lng": {"type": "number"},
+                "status": {"type": "string", "example": "validado"},
+                "orgao": {"type": "string", "example": "subprefeitura"},
+                "g": {"type": "number"},
+                "e": {"type": "number"},
+                "v": {"type": "number"},
+                "r": {"type": "number"},
+                "t": {"type": "number"},
+                "ipv": {"type": "number", "example": 76.5},
+                "faixa": {"type": "string", "enum": ["critico", "alto", "programado"]},
+                "prazoEm": {"type": "string", "format": "date-time", "x-nullable": True},
+                "situacaoDoPrazo": {"type": "string", "example": "Vence em 6 h"},
+                "vencido": {"type": "boolean"},
+                "linhaDoTempo": {"type": "array", "items": {"type": "object"}},
+            },
+        },
+        "Rota": {
+            "type": "object",
+            "required": ["nome", "origem", "destino", "dias", "horario", "meio"],
+            "properties": {
+                "id": {"type": "string", "readOnly": True},
+                "nome": {"type": "string", "example": "Casa → Trabalho"},
+                "origem": {"type": "string", "example": "R. Butantã"},
+                "destino": {"type": "string", "example": "Av. Brig. Faria Lima"},
+                "dias": {"type": "array", "items": {"type": "string"}, "example": ["seg", "ter", "qua"]},
+                "horario": {"type": "string", "example": "08:00"},
+                "meio": {"type": "string", "enum": ["a-pe", "bicicleta", "onibus", "carro", "moto"]},
+            },
+        },
     },
 }
 
@@ -61,6 +102,7 @@ def criar_app():
     })
 
     app.register_blueprint(rotas_de_acesso)
+    app.register_blueprint(rotas_do_cidadao)
 
     @app.get("/")
     def inicio():
