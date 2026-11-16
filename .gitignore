@@ -1,0 +1,8 @@
+.env
+atlas-credentials.env
+.venv/
+__pycache__/
+*.pyc
+logs/
+exportacoes/
+referencias/
