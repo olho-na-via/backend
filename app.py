@@ -10,6 +10,7 @@ from erros import ErroDaApi
 from registro import configurar_logs
 from rotas.acesso import rotas_de_acesso
 from rotas.cidadao import rotas_do_cidadao
+from rotas.painel import rotas_do_painel
 
 logger = logging.getLogger(__name__)
 
@@ -103,6 +104,7 @@ def criar_app():
 
     app.register_blueprint(rotas_de_acesso)
     app.register_blueprint(rotas_do_cidadao)
+    app.register_blueprint(rotas_do_painel)
 
     @app.get("/")
     def inicio():
