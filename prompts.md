@@ -46,6 +46,7 @@ Todo o código deste repositório foi escrito pela ferramenta a partir do pedido
 ## 4. Como os resultados foram verificados, testados e ajustados
 
 - **Testes automatizados:** 13 testes com `unittest` cobrem o IPV, as faixas, o prazo vencido, a deduplicação, a distância, o resgate, a validação de senha, os alertas e a pesquisa binária. Rodam com `python -m unittest discover -s testes -t .`.
+- **Testes unitários dos serviços e da API:** num segundo pedido ("Faça a implantação de testes unitários no backend."), a ferramenta acrescentou testes para o acesso, as ações do painel, os créditos, os utilitários e as rotas da API, chegando a 68 testes. O banco é trocado por objetos falsos com `unittest.mock`, então os testes rodam sem internet e sem mexer nos dados do Atlas.
 - **Testes das rotas contra o MongoDB Atlas:** cada grupo de rotas foi chamado com o cliente de testes do Flask antes do commit, incluindo os casos de erro: senha errada (401), campos inválidos (400), token de cidadão no painel (401), equipe de outro órgão (409), despacho repetido (409), resgate abaixo do mínimo e acima do saldo, e resgate de outra pessoa (404).
 - **Menu no terminal:** executado com entradas simuladas, incluindo senha errada, texto no lugar de número, opção inexistente e protocolo que não existe.
 - **Ajustes feitos durante a verificação:**

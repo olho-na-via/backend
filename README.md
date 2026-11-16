@@ -50,11 +50,21 @@ python app.py
 python main.py
 ```
 
-Rode os testes das regras de negócio:
+Rode os testes unitários:
 
 ```bash
 python -m unittest discover -s testes -t .
 ```
+
+Os testes não usam o MongoDB: `testes/apoio.py` troca as coleções por objetos falsos (`unittest.mock`), então rodam sem internet e não mexem nos dados do Atlas.
+
+| Arquivo | O que testa |
+| --- | --- |
+| `test_regras.py` | IPV, faixas, prazos, deduplicação, créditos, senha, alertas e pesquisa binária |
+| `test_utilitarios.py` | hash de senha, validação dos campos, exceções, datas, leitura do `.env` e deslocamento de datas do seed |
+| `test_acesso.py` | login, sessões por área, cadastro, código de troca de senha e tentativas |
+| `test_servicos.py` | ações do painel e status permitidos, reabertura e recapeamento, confirmação de reparo, resgate de créditos e preferências |
+| `test_api.py` | rotas da API: 401 sem token, sessão de outra área, formato dos erros, 404/405, banco fora do ar (503), erro inesperado (500) e Swagger |
 
 ## Contas de demonstração
 
