@@ -6,7 +6,7 @@ from getpass import getpass
 
 from pymongo.errors import PyMongoError
 
-from banco import colecao, para_json
+from banco import banco_local_vazio, colecao, modo_local, para_json
 from config import PASTA_DO_PROJETO
 from erros import ErroDaApi
 from regras import CATEGORIAS, pesquisa_binaria
@@ -231,6 +231,11 @@ def main():
     linha("═")
     print("OLHO NA VIA · Painel do gestor no terminal")
     linha("═")
+    if modo_local():
+        print("Modo local: os dados ficam em arquivos JSON na pasta dados_locais/ (sem MONGODB_URI).")
+        if banco_local_vazio():
+            contagem = popular_banco()
+            print(f"Primeiro uso: carregamos {contagem['chamados']} chamados de demonstração.")
     try:
         sessao = entrar()
     except PyMongoError:

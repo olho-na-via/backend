@@ -5,6 +5,7 @@ from flask import Flask, jsonify, redirect
 from pymongo.errors import PyMongoError
 from werkzeug.exceptions import HTTPException
 
+from banco import banco_local_vazio
 from config import CONFIG
 from erros import ErroDaApi
 from registro import configurar_logs
@@ -12,6 +13,7 @@ from rotas.acesso import rotas_de_acesso
 from rotas.cidadao import rotas_do_cidadao
 from rotas.dados_abertos import rotas_de_dados_abertos
 from rotas.painel import rotas_do_painel
+from seed import popular_banco
 
 logger = logging.getLogger(__name__)
 
@@ -136,4 +138,7 @@ def criar_app():
 
 
 if __name__ == "__main__":
+    if banco_local_vazio():
+        popular_banco()
+        print("Modo local: dados de demonstração carregados em dados_locais/.")
     criar_app().run(port=CONFIG["porta"], debug=False)

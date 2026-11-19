@@ -32,11 +32,8 @@ def carregar_configuracao():
         if chave.startswith(("MONGODB_", "OLHO_")):
             valores[chave] = valor
 
-    if not valores.get("MONGODB_URI"):
-        raise RuntimeError("Defina MONGODB_URI no arquivo .env ou em atlas-credentials.env.")
-
     return {
-        "mongodb_uri": valores["MONGODB_URI"],
+        "mongodb_uri": valores.get("MONGODB_URI"),
         "mongodb_usuario": valores.get("MONGODB_USERNAME"),
         "mongodb_senha": valores.get("MONGODB_PASSWORD"),
         "mongodb_banco": valores["MONGODB_BANCO"],
