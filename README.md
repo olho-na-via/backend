@@ -10,6 +10,21 @@
 
 ---
 
+## Ficha da CitizenTech
+
+| Campo | Olho na Via |
+| --- | --- |
+| Nome da CitizenTech | **Olho na Via**: fiscalização urbana com IA |
+| Cidade e bairro | São Paulo (SP). Piloto proposto: linhas de ônibus que cruzam a região central e a Av. Paulista (entorno da FIAP Paulista) e seguem até bairros da periferia, em duas subprefeituras a definir com a Prefeitura. Os dados de demonstração usam Butantã, Lapa e Pinheiros. |
+| Cidadão beneficiado | Quem usa a rua todos os dias: passageiros de ônibus, motociclistas e entregadores, ciclistas, pedestres (principalmente idosos e pessoas com deficiência) e moradores de áreas que alagam. Também o gestor público, que precisa decidir onde agir primeiro. |
+| Problema, em uma frase | Em São Paulo, buracos, alagamentos, faixas apagadas e semáforos apagados só entram na fila de reparo quando alguém reclama, e ninguém confere de forma sistemática se o conserto foi bem feito. |
+| Como funciona | Um dispositivo IoT com câmera, acelerômetro e GPS, instalado em ônibus, e a análise das câmeras do Smart Sampa detectam problemas com IA. O sistema abre o chamado no órgão responsável, prioriza pela gravidade e, quando o ônibus passa de novo, confirma se o reparo foi feito. Também avisa cidadãos e ambulâncias sobre vias alagadas ou bloqueadas. Cidadãos contribuem pelo app e com um kit próprio em troca de créditos. |
+| O que cada parte faz | **Sensor (Edge/ESP32):** mede impacto, lâmina d'água e luz e decide o estado sozinho · **Lógica (Python, este repositório):** organiza os chamados, calcula a prioridade, decide a ação da gestão e guarda os dados em JSON ou no MongoDB · **Matemática:** modela o crescimento do buraco e o custo acumulado do atraso · **Interface e Interação (React):** app do cidadão e painel do gestor · **Experiência:** jornada, requisitos e roadmap · **Pitch:** a história em 3 minutos. |
+| Link do repositório | Backend: [github.com/olho-na-via/backend](https://github.com/olho-na-via/backend) · Frontend: [github.com/olho-na-via/frontend](https://github.com/olho-na-via/frontend) |
+| Indicador de impacto | **Tempo entre o surgimento do problema e o reparo confirmado** (meta: de 6 para no máximo 3 dias nas áreas piloto) e **% de problemas detectados antes de qualquer reclamação** (meta: 60% ou mais). |
+| ODS conectados | `ODS 11` `ODS 9` `ODS 3` `ODS 13` `ODS 10` `ODS 16 · complementar` |
+| Equipe | **Erick Nathan Capito Pereira** · RM573635 |
+
 ## Sobre
 
 Aplicação Python do **Olho na Via**, projeto de fiscalização urbana com IA para São Paulo. Ônibus e câmeras públicas detectam buracos, alagamentos, faixas apagadas e semáforos apagados. Esta aplicação processa os dados da zeladoria das vias e toma as decisões do sistema:
@@ -24,10 +39,17 @@ São duas formas de usar, sobre as mesmas regras e o mesmo banco:
 
 | Interface | Para quem | Como abrir |
 | --- | --- | --- |
+| **Menu no terminal** (entrega principal da disciplina) | Gestor da zeladoria | `python main.py` |
 | **API REST** (Flask) com documentação **Swagger** | App do cidadão, painel do gestor e portal de dados abertos (frontend) | `python app.py` e acesse `http://localhost:5000/docs/` |
-| **Menu no terminal** | Gestor da zeladoria | `python main.py` |
 
-Os dados ficam no **MongoDB Atlas**. Os dados de demonstração ficam em arquivos **JSON** na pasta `dados/` e são carregados pelo `seed.py`. O menu exporta os chamados para JSON na pasta `exportacoes/`.
+Os dados ficam em um de dois lugares:
+
+| Modo | Quando | Onde ficam os dados |
+| --- | --- | --- |
+| **Local** (padrão) | Sem `MONGODB_URI` configurado | Um arquivo **JSON** por coleção, na pasta `dados_locais/`. Cada alteração é lida e gravada nesses arquivos |
+| **MongoDB Atlas** | Com `MONGODB_URI` no `.env` ou em `atlas-credentials.env` | No banco `olho_na_via` do cluster |
+
+Nos dois modos, os dados de demonstração saem dos arquivos **JSON** da pasta `dados/` e são carregados pelo `seed.py`. O menu também exporta os chamados para JSON na pasta `exportacoes/`.
 
 ## Funcionalidades
 
@@ -70,7 +92,7 @@ Login com senha errada e depois certa, fila do dia, opção inválida, busca do 
 | Linguagem | [Python](https://www.python.org) 3.11 ou mais novo |
 | API REST | [Flask](https://flask.palletsprojects.com) 3.1 |
 | Documentação da API | [Flasgger](https://github.com/flasgger/flasgger) 0.9.7 (Swagger UI e especificação OpenAPI 2.0) |
-| Banco de dados | [MongoDB Atlas](https://www.mongodb.com/atlas), acessado com [PyMongo](https://pymongo.readthedocs.io) 4.20 |
+| Banco de dados | Arquivos JSON locais (padrão) ou [MongoDB Atlas](https://www.mongodb.com/atlas), acessado com [PyMongo](https://pymongo.readthedocs.io) 4.20 |
 | Dados de demonstração e exportação | Arquivos JSON (`json` da biblioteca padrão) |
 | Senhas e tokens | `hashlib` (PBKDF2 com sal) e `secrets`, da biblioteca padrão |
 | Logs | `logging`, em `logs/olho_na_via.log` |
@@ -92,8 +114,10 @@ flowchart TD
     S --> V["validacao.py · erros.py · seguranca.py · datas.py"]
     S --> B["banco.py"]
     R["regras.py<br/>IPV, prazos, deduplicação, créditos, alertas e busca"]
-    B --> D[("MongoDB Atlas")]
+    B -->|com MONGODB_URI| D[("MongoDB Atlas")]
+    B -->|sem MONGODB_URI| L["banco_local.py<br/>dados_locais/*.json"]
     J["dados/*.json"] -->|seed.py| D
+    J -->|seed.py| L
 ```
 
 | Camada | Onde | Responsabilidade |
@@ -102,7 +126,7 @@ flowchart TD
 | Serviços | `servicos/` | Os casos de uso: abrir um chamado, despachar, resgatar créditos. Leem e gravam no banco e aplicam as regras |
 | Regras | `regras.py` | Funções puras: IPV, faixa, prazo, ação sugerida, distância, deduplicação, créditos e pesquisa binária. São as mais testadas |
 | Apoio | `validacao.py`, `erros.py`, `seguranca.py`, `datas.py`, `registro.py` | Validação dos campos, exceções com código HTTP, hash de senha e token, datas no fuso de São Paulo e logs |
-| Dados | `banco.py`, `seed.py`, `dados/` | Conexão com o MongoDB e carga dos dados de demonstração |
+| Dados | `banco.py`, `banco_local.py`, `seed.py`, `dados/` | Escolha entre o MongoDB e os arquivos JSON locais, e carga dos dados de demonstração |
 
 Cada exceção de `erros.py` carrega o seu código HTTP. A API transforma qualquer uma delas na mesma resposta de erro, e o menu mostra a mensagem sem fechar o programa.
 
@@ -119,7 +143,9 @@ A descrição de cada rota fica na docstring da própria função, em `rotas/`, 
 
 ## Como rodar
 
-Requisitos: Python 3.11 ou mais novo e acesso a um cluster MongoDB.
+Requisito: Python 3.11 ou mais novo. Não é preciso internet nem banco de dados.
+
+**1. Instale as dependências**
 
 ```bash
 python -m venv .venv
@@ -128,7 +154,25 @@ source .venv/bin/activate       # Linux e macOS
 pip install -r requirements.txt
 ```
 
-Configure a conexão. O programa lê, nesta ordem, `atlas-credentials.env`, `.env` e as variáveis de ambiente (veja `.env.example`):
+**2. Abra o menu do gestor**
+
+```bash
+python main.py
+```
+
+Entre com `carla@demo.olhonavia.com.br` e a senha `olhonavia`. No primeiro uso, o programa carrega sozinho os dados de demonstração em `dados_locais/`. A opção 8 do menu volta os dados ao estado inicial.
+
+**3. (Opcional) Suba a API e abra o Swagger**
+
+```bash
+python app.py
+```
+
+A documentação fica em `http://localhost:5000/docs/`.
+
+**4. (Opcional) Use o MongoDB Atlas no lugar dos arquivos JSON**
+
+Crie um `.env` (veja `.env.example`). O programa lê, nesta ordem, `atlas-credentials.env`, `.env` e as variáveis de ambiente:
 
 ```
 MONGODB_URI=mongodb+srv://usuario:senha@cluster.exemplo.mongodb.net/
@@ -137,20 +181,13 @@ OLHO_MODO_DEMONSTRACAO=1
 OLHO_PORTA=5000
 ```
 
-Carregue os dados de demonstração (apaga o que houver no banco `olho_na_via`):
+Depois, carregue os dados de demonstração no banco (apaga o que houver no banco `olho_na_via`):
 
 ```bash
 python seed.py
 ```
 
-Suba a API ou abra o menu:
-
-```bash
-python app.py
-python main.py
-```
-
-Rode os testes unitários:
+**Testes unitários**
 
 ```bash
 python -m unittest discover -s testes -t .
@@ -165,6 +202,7 @@ Os testes não usam o MongoDB: `testes/apoio.py` troca as coleções por objetos
 | `test_acesso.py` | login, sessões por área, cadastro, código de troca de senha e tentativas |
 | `test_servicos.py` | ações do painel e status permitidos, reabertura e recapeamento, confirmação de reparo, resgate de créditos e preferências |
 | `test_api.py` | rotas da API: 401 sem token, sessão de outra área, formato dos erros, 404/405, banco fora do ar (503), erro inesperado (500) e Swagger |
+| `test_banco_local.py` | modo local em JSON: filtros, projeção, ordem, atualizações, remoção, agregação e leitura do arquivo gravado |
 
 ## Contas de demonstração
 
@@ -179,6 +217,15 @@ Todas usam a senha `olhonavia`.
 | Painel do gestor | `carla@demo.olhonavia.com.br` | Gestora da zeladoria do Butantã |
 
 Com `OLHO_MODO_DEMONSTRACAO=1`, a rota `POST /api/acesso/demonstracao` entra como uma persona sem senha, e a troca de senha devolve o código na resposta (não há envio de e-mail).
+
+## Origem dos dados
+
+**Todos os dados deste repositório são simulados.** Nenhuma pessoa, chamado ou conta é real.
+
+- **Pessoas:** as personas (Juliana, Lourdes, Marta, Rafael e a gestora Carla) foram criadas a partir das entrevistas e das jornadas do Sumário Executivo. Os e-mails usam o domínio fictício `demo.olhonavia.com.br`.
+- **Chamados, alertas, equipes, prestadoras e indicadores:** foram escritos à mão para o mock do frontend (json-server) e exportados para `dados/*.json`, para que o backend e o frontend contem a mesma história. O `seed.py` desloca as datas para o momento da carga, para que os prazos façam sentido em qualquer dia.
+- **Ruas, bairros e subprefeituras:** são nomes reais de São Paulo, com coordenadas aproximadas (Butantã, Lapa e Pinheiros), usados só para dar contexto ao mapa. Os problemas apontados nelas são inventados.
+- **Pesos do IPV, prazos e metas:** vêm do Sumário Executivo do projeto, ajustados com o feedback das entrevistas feitas pela equipe.
 
 ## Rotas da API
 
@@ -224,7 +271,8 @@ app.py            API Flask, Swagger e tratamento de erros
 main.py           menu no terminal
 seed.py           carga dos dados de demonstração (dados/*.json → MongoDB)
 config.py         leitura do .env e do atlas-credentials.env
-banco.py          conexão com o MongoDB
+banco.py          escolhe entre o MongoDB e o modo local
+banco_local.py    modo local: cada coleção em um arquivo JSON
 regras.py         regras de negócio: IPV, prazos, deduplicação, créditos, alertas e busca
 validacao.py      validação dos dados recebidos
 erros.py          exceções da aplicação, cada uma com o seu código HTTP
@@ -234,6 +282,7 @@ registro.py       logs em logs/olho_na_via.log
 servicos/         acesso, chamados, conta, painel e dados abertos
 rotas/            rotas da API, uma por área
 dados/            dados de demonstração em JSON
+dados_locais/     dados do modo local (criada no primeiro uso, fora do git)
 testes/           testes unitários (unittest), sem banco real
 docs/             logo e gravações das funcionalidades
 ```
@@ -249,12 +298,26 @@ docs/             logo e gravações das funcionalidades
 | `while` e `for` | laços de entrada em `main.py`, `pesquisa_binaria`, cálculos em `regras.py` |
 | Funções com parâmetros e retorno | todos os módulos |
 | Listas, tuplas e dicionários | `CATEGORIAS`, `ORGAOS` (tuplas), `PESOS_IPV`, filas e resumos |
-| Arquivos JSON | `seed.py` (leitura de `dados/`), exportação em `main.py` |
+| Arquivos JSON | leitura e gravação de cada coleção em `banco_local.py` (modo local), `seed.py` (leitura de `dados/`) e exportação em `main.py` |
 | Logs | `registro.py` e `logging` nos serviços |
 | Banco de dados não relacional | MongoDB com `pymongo`: documentos aninhados, índices e agregação (`$group` em `servicos/dados_abertos.py`) |
 | Algoritmos de busca | pesquisa binária por protocolo (`regras.pesquisa_binaria`, opção 2 do menu) |
-| Orientação a objetos | hierarquia de exceções em `erros.py` |
+| Orientação a objetos | hierarquia de exceções em `erros.py` e as classes `BancoLocal`, `ColecaoLocal` e `Cursor` em `banco_local.py` |
 | APIs REST | rotas com verbos e códigos HTTP corretos, JSON e documentação Swagger |
+
+## Os trechos mais técnicos, explicados
+
+**IPV (`regras.calcular_ipv`).** Cada chamado tem cinco notas de 0 a 1: gravidade (G), exposição (E), vulnerabilidade de quem passa (V), reincidência (R) e tempo em aberto (T). O IPV é a soma ponderada `100 × (0,35·G + 0,25·E + 0,20·V + 0,10·R + 0,10·T)`. O resultado vai de 0 a 100: 70 ou mais é crítico (prazo de 24 h), de 40 a 70 é alto (72 h), e abaixo de 40 entra no plano semanal. A função também devolve quanto cada nota contribuiu, que é o que o menu mostra no detalhe do chamado.
+
+**Distância entre dois pontos (`regras.distancia_em_metros`).** Latitude e longitude são ângulos sobre uma esfera, então não dá para usar a distância de uma reta. A fórmula de Haversine converte a diferença dos ângulos em radianos e calcula o arco entre os pontos sobre a Terra, com raio de 6.371 km. Com ela, o sistema junta reportes da mesma categoria a até 15 m (`achar_chamado_no_mesmo_ponto`) e acha a via mais próxima para montar o endereço.
+
+**Pesquisa binária (`regras.pesquisa_binaria`, opção 2 do menu).** O menu ordena os chamados pelo protocolo e procura o número olhando sempre o meio da lista. Se o protocolo do meio for maior, descarta a metade de cima; se for menor, a de baixo. Com 103 chamados, acha qualquer protocolo em no máximo 7 comparações, contra até 103 de uma busca item por item.
+
+**Senha guardada como hash (`seguranca.py`).** A senha nunca é gravada. O sistema gera um sal aleatório de 16 bytes (`secrets.token_hex`) e aplica o PBKDF2 com SHA-256 200 mil vezes (`hashlib.pbkdf2_hmac`). Grava só o resultado e o sal. No login, refaz a conta com a senha digitada e compara com `hmac.compare_digest`, que leva o mesmo tempo com acerto ou erro e não dá pista a quem tenta adivinhar. O sal faz duas senhas iguais virarem hashes diferentes.
+
+**Agrupamento dos dados abertos (`servicos/dados_abertos.py`).** O portal precisa de totais por subprefeitura e por status. A etapa `$group` do MongoDB junta os chamados com a mesma combinação `{subprefeitura, status}` e soma 1 para cada um (`$sum: 1`). O Python depois soma os grupos em resolvidos, descartados e abertos com `match/case`. No modo local, `banco_local.agrupar` faz o mesmo com um dicionário.
+
+**Modo local (`banco_local.py`).** Imita só a parte do PyMongo que o projeto usa, para que os serviços funcionem igual nos dois modos. Cada coleção vira uma lista de dicionários, lida do arquivo JSON na primeira consulta. Cada alteração (`insert_one`, `update_one`, `delete_one`...) muda a lista e regrava o arquivo inteiro. A gravação vai primeiro para um arquivo temporário e só depois troca o original (`os.replace`), para não corromper os dados se o programa fechar no meio.
 
 ## Privacidade
 
@@ -262,7 +325,7 @@ O Olho na Via olha para a via, não para as pessoas. As senhas são guardadas s�
 
 ## Uso de IA
 
-O registro de como a IA foi usada no desenvolvimento está em [prompts.md](prompts.md), como pede o desafio.
+O registro de como a IA foi usada no desenvolvimento está em [prompts.md](prompts.md), como pede o desafio. Como a página 32 cita o nome `prompt.md`, esse arquivo também existe e aponta para o `prompts.md`.
 
 ## Autor
 
