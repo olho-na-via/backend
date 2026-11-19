@@ -87,12 +87,12 @@ def mostrar_fila(gestor):
         f"{totais['vencidos']} vencidos · {totais['criticosVencemHoje']} críticos vencem hoje"
     )
     linha()
-    print(f"{'Protocolo':<10}{'IPV':>6}  {'Faixa':<11}{'Prazo':<18}{'Ação':<11}Local")
+    print(f"{'Protocolo':<10}{'IPV':>6}  {'Faixa':<11}{'Prazo':<20}{'Ação':<11}Local")
     linha()
     for chamado in dados["fila"][:15]:
         print(
             f"{chamado['protocolo']:<10}{chamado['ipv']:>6.1f}  {NOMES_DAS_FAIXAS[chamado['faixa']]:<11}"
-            f"{chamado['situacaoDoPrazo']:<18}{chamado['acaoSugerida']:<11}{chamado['endereco'][:28]}"
+            f"{chamado['situacaoDoPrazo']:<20}{chamado['acaoSugerida']:<11}{chamado['endereco'][:28]}"
         )
     if len(dados["fila"]) > 15:
         print(f"... e mais {len(dados['fila']) - 15} chamados.")
