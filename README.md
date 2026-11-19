@@ -325,8 +325,7 @@ O Olho na Via olha para a via, não para as pessoas. As senhas são guardadas s�
 
 ## Uso de IA
 
-O registro de como a IA foi usada no desenvolvimento está em [prompts.md](prompts.md), como pede o desafio. Como a página 32 cita o nome `prompt.md`, esse arquivo também existe e aponta para o `prompts.md`.
-
+O registro de como a IA foi usada no desenvolvimento está em [prompts.md](prompts.md), como pede o desafio.
 ## Autor
 
 Erick Nathan Capito Pereira · RM573635

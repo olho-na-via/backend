@@ -71,7 +71,7 @@ Os pedidos estão transcritos como foram enviados.
 - **modo local em JSON:** sem `MONGODB_URI`, os dados ficam em `dados_locais/*.json`, carregados sozinhos no primeiro uso. O professor roda `python main.py` sem internet e sem banco. Isso também cumpre a persistência em JSON com leitura e gravação;
 - Ctrl+C e fim da entrada no menu encerram o programa com uma mensagem, sem traceback;
 - README com a Ficha da CitizenTech, a origem dos dados, o menu como primeiro passo do "Como rodar" e a explicação dos trechos mais técnicos;
-- o arquivo `prompt.md`, que aponta para este.
+- um arquivo `prompt.md` que apontava para este. Depois pedi para manter só um arquivo ("Acabou que ficou dois arquivos prompts.md e prompt.md no backend, mantenha apenas um"), e o `prompt.md` foi removido.
 
 ## 5. Funcionalidades desenvolvidas com auxílio da IA
 
@@ -122,6 +122,6 @@ Os pedidos estão transcritos como foram enviados.
 **Dificuldades**
 
 - **Leitura do PDF:** o PDF do desafio não pôde ser lido como imagem no ambiente (faltava o poppler) e foi lido como texto, o que perde a formatação.
-- **Nome do arquivo:** o documento cita o arquivo de IA com dois nomes diferentes, `prompts.md` nas páginas 22 e 31 e `prompt.md` na página 32. O conteúdo fica em `prompts.md`, e um `prompt.md` curto aponta para ele.
+- **Nome do arquivo:** o documento cita o arquivo de IA com dois nomes diferentes, `prompts.md` nas páginas 22 e 31 e `prompt.md` na página 32. Ficou só o `prompts.md`, o nome usado em duas das três páginas.
 - **Um erro que só aparece fora da máquina de quem desenvolve:** o programa funcionava aqui porque as credenciais estavam no disco. Só a revisão contra o desafio mostrou que o ZIP, sem elas, não abriria. Daí veio o modo local.
 - **Gravar um programa de terminal:** um navegador não grava o terminal. O vídeo do menu foi feito rodando o `main.py` de verdade com entradas roteirizadas e reproduzindo a saída capturada.
