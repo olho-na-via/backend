@@ -236,6 +236,9 @@ def main():
     except PyMongoError:
         print("Não conseguimos falar com o banco de dados. Confira a internet e o MONGODB_URI.")
         return
+    except (KeyboardInterrupt, EOFError):
+        print("\nAté logo.")
+        return
     if sessao is None:
         print("Não foi possível entrar. Até logo.")
         return
@@ -247,7 +250,11 @@ def main():
         print()
         for codigo, descricao in OPCOES:
             print(f"  {codigo}. {descricao}")
-        opcao = input("Escolha uma opção: ").strip()
+        try:
+            opcao = input("Escolha uma opção: ").strip()
+        except (KeyboardInterrupt, EOFError):
+            print()
+            opcao = "0"
         if opcao == "0":
             acesso.sair(sessao["token"])
             print("Até logo.")
@@ -259,7 +266,9 @@ def main():
         except PyMongoError:
             logger.exception("Falha no banco durante o menu")
             print("Não conseguimos falar com o banco de dados. Tente de novo.")
-        except KeyboardInterrupt:
+        except OSError as erro:
+            print(f"Não conseguimos ler ou gravar os dados locais: {erro}")
+        except (KeyboardInterrupt, EOFError):
             print("\nOperação cancelada.")
 
 
