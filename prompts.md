@@ -60,6 +60,19 @@ Os pedidos estão transcritos como foram enviados.
 
 **Ajuste que veio da gravação:** ao rodar o menu para gravar, a ferramenta viu que a fila quebrava o alinhamento quando o prazo era longo ("Vencido há 10 diasdespachar") e alargou a coluna em `main.py`.
 
+### 4.4 Revisão contra o desafio
+
+> Revise as entregas de backend de acordo com o desafio @"Desafio-FIAP-GS-CitizenTech 1ES Paulista e Lins.pdf" faça apontamentos caso houver e sugestões de melhoria para ficar um trabalho mais completinho.
+
+**Resposta:** a ferramenta comparou o backend com as páginas 21, 22 e 29 a 32 e encontrou um problema grave: sem o arquivo de credenciais do MongoDB, que fica fora do git e do ZIP, o programa fechava com um erro logo ao abrir. Também apontou a falta da Ficha da CitizenTech no README, a falta da origem dos dados, o traceback ao apertar Ctrl+C no menu e o nome `prompt.md` citado na página 32.
+
+**Ajuste:** escolhi quais apontamentos corrigir ("Corrija 1, 2, 3, 4, 6, 7 e 8"). Deixei de fora a troca do Flask, que é uma escolha consciente já explicada na seção 7. As correções foram:
+
+- **modo local em JSON:** sem `MONGODB_URI`, os dados ficam em `dados_locais/*.json`, carregados sozinhos no primeiro uso. O professor roda `python main.py` sem internet e sem banco. Isso também cumpre a persistência em JSON com leitura e gravação;
+- Ctrl+C e fim da entrada no menu encerram o programa com uma mensagem, sem traceback;
+- README com a Ficha da CitizenTech, a origem dos dados, o menu como primeiro passo do "Como rodar" e a explicação dos trechos mais técnicos;
+- o arquivo `prompt.md`, que aponta para este.
+
 ## 5. Funcionalidades desenvolvidas com auxílio da IA
 
 - **Regras de negócio** (`regras.py`): cálculo do IPV com os pesos públicos, faixas e prazos, deduplicação por distância (fórmula de Haversine), créditos e limite de resgate, validade dos alertas e pesquisa binária.
@@ -67,6 +80,7 @@ Os pedidos estão transcritos como foram enviados.
 - **App do cidadão** (`servicos/chamados.py` e `servicos/conta.py`): reporte com endereço pela via mais próxima, seguir um chamado, confirmar o reparo com foto, rotas e alertas, preferências de aviso, carteira e resgate.
 - **Painel do gestor** (`servicos/painel.py`): fila do dia pelo IPV, lista com filtros e paginação, despacho, encaminhamento, agendamento, descarte, revisão do IPV, vistoria, reabertura, prestadoras, indicadores, relatórios e mapa operacional.
 - **Dados abertos** (`servicos/dados_abertos.py`): totais por subprefeitura com agregação do MongoDB, indicadores e ranking das prestadoras, sem dados pessoais.
+- **Modo local** (`banco_local.py`): as coleções guardadas em arquivos JSON, imitando a parte do PyMongo que o projeto usa, para rodar sem MongoDB.
 - **Documentação Swagger** (`app.py` e as docstrings das rotas), **seed** (`seed.py` e `dados/*.json`), **menu no terminal** (`main.py`), **testes** (`testes/`), `README.md`, os vídeos em `docs/videos/` e este arquivo.
 
 **Sugestões da IA que mudaram o pedido original:**
@@ -80,7 +94,7 @@ Os pedidos estão transcritos como foram enviados.
 
 ## 6. Como os resultados foram verificados, testados e ajustados
 
-- **Testes automatizados:** 68 testes com `unittest` cobrem as regras de negócio, os utilitários, o acesso, os serviços e as rotas da API. Rodam com `python -m unittest discover -s testes -t .`, sem internet e sem tocar no Atlas.
+- **Testes automatizados:** 75 testes com `unittest` cobrem as regras de negócio, os utilitários, o acesso, os serviços, as rotas da API e o modo local. Rodam com `python -m unittest discover -s testes -t .`, sem internet e sem tocar no Atlas.
 - **Testes das rotas contra o MongoDB Atlas:** cada grupo de rotas foi chamado com o cliente de testes do Flask antes do commit, incluindo os casos de erro: senha errada (401), campos inválidos (400), token de cidadão no painel (401), equipe de outro órgão (409), despacho repetido (409), resgate abaixo do mínimo e acima do saldo, e resgate de outra pessoa (404).
 - **Swagger no navegador:** as gravações do README executam as rotas pela própria página do Swagger, com login, token, erro de validação, acesso sem token e rota pública.
 - **Menu no terminal:** executado com entradas simuladas, incluindo senha errada, texto no lugar de número, opção inexistente e protocolo que não existe.
@@ -88,7 +102,8 @@ Os pedidos estão transcritos como foram enviados.
   - um teste do IPV esperava 80,5, mas a conta correta dá 76,5. O erro estava no teste, não na regra, e foi corrigido;
   - a saída no terminal do Windows quebrava ao imprimir a seta "→". Os testes passaram a rodar com `PYTHONIOENCODING=utf-8`; o código não precisou mudar;
   - o login do menu passou a encerrar a sessão ao sair, para não deixar tokens abertos no banco;
-  - a coluna de prazo da fila no menu foi alargada, porque "Vencido há 10 dias" encostava na coluna seguinte.
+  - a coluna de prazo da fila no menu foi alargada, porque "Vencido há 10 dias" encostava na coluna seguinte;
+  - o modo local foi conferido rodando o menu e todas as áreas da API numa cópia do projeto sem credenciais: login, fila, busca, despacho, descarte, cadastro, reporte, seguir, rotas, dados abertos e troca de senha. Os totais dos dados abertos bateram com o número de chamados, e as mudanças continuaram lá ao abrir o programa de novo.
 
 ## 7. Análise crítica
 
@@ -107,5 +122,6 @@ Os pedidos estão transcritos como foram enviados.
 **Dificuldades**
 
 - **Leitura do PDF:** o PDF do desafio não pôde ser lido como imagem no ambiente (faltava o poppler) e foi lido como texto, o que perde a formatação.
-- **Nome do arquivo:** o documento cita o arquivo de IA com dois nomes diferentes, `prompts.md` na página 31 e `prompt.md` na página 32. Fiquei com `prompts.md`.
+- **Nome do arquivo:** o documento cita o arquivo de IA com dois nomes diferentes, `prompts.md` nas páginas 22 e 31 e `prompt.md` na página 32. O conteúdo fica em `prompts.md`, e um `prompt.md` curto aponta para ele.
+- **Um erro que só aparece fora da máquina de quem desenvolve:** o programa funcionava aqui porque as credenciais estavam no disco. Só a revisão contra o desafio mostrou que o ZIP, sem elas, não abriria. Daí veio o modo local.
 - **Gravar um programa de terminal:** um navegador não grava o terminal. O vídeo do menu foi feito rodando o `main.py` de verdade com entradas roteirizadas e reproduzindo a saída capturada.
